@@ -25,15 +25,14 @@ console.log(fetchBreeds());
 
 function fetchCatByBreed(breedId) {
   return fetch(
-    `${BASE_URL}${END_POINT_IMG}?breed_ids=${breedId}&api_key=${API_KEY}`
+    `${BASE_URL}/images/search?api_key=${API_KEY}&breed_ids=${breedId}`
   ).then(response => {
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error(response.status);
     }
     return response.json();
   });
 }
 console.log(fetchCatByBreed());
 
-export {fetchBreeds, fetchCatByBreed}
 
