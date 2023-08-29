@@ -5,34 +5,35 @@
 
 // axios.defaults.headers.common['x-api-key'] = 'твой ключ';
 
-'https://api.thecatapi.com/v1/images/search?api_key=YOUR_API_KEY'
-
-const BASE_URL = 'https://api.thecatapi.com/v1/images/search';
+const BASE_URL = 'https://api.thecatapi.com/v1';
+const END_POINT_BREEDS = '/breeds';
+const END_POINT_IMG = '/images/search';
 const API_KEY ='live_nyzZ4QjNtDq03IFxKqTnmDqyZDlfHDPE7tDYK56tjMFQ80XfJTc6gNUHpWGEEVPD';
 
-//api.thecatapi.com/v1/images/search?breed_ids=идентификатор_породы
-
-// const searchParams = new URLSearchParams({
-//     breed_ids: breedId,
-//     api_key:API_KEY,
-// })
-
+//api.thecatapi.com/v1/breeds
 function fetchBreeds() {
-  return fetch(`${BASE_URL}?breeds&api_key=${API_KEY}`).then(response => {
+  return fetch(`${BASE_URL}${END_POINT_BREEDS}?${API_KEY}`).then(response => {
     if (!response.ok) {
-      throw new Error(response.status);
+      throw new Error(response.statusText);
     }
     return response.json();
   });
 }
+console.log(fetchBreeds());
 
+//api.thecatapi.com/v1/images/search?breed_ids=идентификатор_породы
 
-function getBreedCat(breedId) {
-    return fetch(`${BASE_URL}?api_key=${API_KEY}&breed_ids=${breedId}`).then(response => {
-        if (!response.ok) {
-            throw new Error(response.status)
-        }
-        return response.json()
+function fetchCatByBreed(breedId) {
+  return fetch(
+    `${BASE_URL}${END_POINT_IMG}?breed_ids=${breedId}&api_key=${API_KEY}`
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
-    )
+    return response.json();
+  });
 }
+console.log(fetchCatByBreed());
+
+export {fetchBreeds, fetchCatByBreed}
+
