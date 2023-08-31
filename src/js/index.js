@@ -44,7 +44,7 @@ function updateSelect(data) {
       let markSelect = data.map(({ name, id }) => {
         return `<option value ='${id}'>${name}</option>`;
       });
-      breedSelect.insertAdjacentHTML('beforeend', markSelect);
+      breedSelect.innerHTML('beforeend', markSelect);
       new SlimSelect({
         select: breedSelect,
       });
