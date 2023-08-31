@@ -12,6 +12,25 @@ catInfo.classList.add('is-hidden');
 
 breedSelect.addEventListener('change', createMarkup)
 
+
+
+function updateSelect(data) {
+  fetchBreeds(data)
+    .then(data => {
+      loader.classList.replace('loader', 'is-hidden');
+
+      let markSelect = data.map(({ name, id }) => {
+        return `<option value ='${id}'>${name}</option>`;
+      });
+      breedSelect.insertAdjacentHTML('beforeend', markSelect);
+      new SlimSelect({
+        select: breedSelect,
+      });
+    })
+    .catch(onError);
+}
+updateSelect();
+
 function createMarkup(evt) {
   loader.classList.replace('is-hidden', 'loader');
   breedSelect.classList.add('is-hidden');
@@ -34,24 +53,6 @@ function createMarkup(evt) {
     })
     .catch(onError);
 }
-updateSelect()
-
-function updateSelect(data) {
-  fetchBreeds(data)
-    .then(data => {
-      loader.classList.replace('loader', 'is-hidden');
-
-      let markSelect = data.map(({ name, id }) => {
-        return `<option value ='${id}'>${name}</option>`;
-      });
-      breedSelect.innerHTML('beforeend', markSelect);
-      new SlimSelect({
-        select: breedSelect,
-      });
-    })
-    .catch(onError);
-}
-
 
 function onError() {
   breedSelect.classList.remove('is-hidden');
