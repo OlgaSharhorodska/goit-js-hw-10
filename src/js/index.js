@@ -32,7 +32,7 @@ function createMarkup(evt) {
       <p><strong>Temperament:</strong> ${breeds[0].temperament}</p></div>`;
       catInfo.classList.remove('is-hidden');
     })
-    .catch(onFetchError);
+    .catch(onError);
 }
 updateSelect()
 
